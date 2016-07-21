@@ -2,3 +2,6 @@ language: go
 
 go:
   - 1.5.4
+
+before_install:
+  - go get -u -v github.com/spf13/hugo
