@@ -1,9 +1,1 @@
 language: go
-
-go:
-    - "1.5.1"
-
-env:
-    global:
-        - SOURCE_DIR="public"
-        - DEPLOY_BRANCH="source"
