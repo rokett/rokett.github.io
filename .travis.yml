@@ -1,14 +1,6 @@
-language: go
-
-go:
-  - 1.5.4
-
-branches:
-  only:
-  - source
-
 before_install:
-  - go get -u -v github.com/spf13/hugo
+  - wget https://github.com/spf13/hugo/releases/download/v0.16/hugo_0.16-1_amd64.deb
+  - sudo dpkg -i hugo_0.16-1_amd64.deb
 
 script:
   - hugo
