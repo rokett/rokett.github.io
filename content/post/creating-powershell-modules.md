@@ -49,4 +49,4 @@ This is the module loader file.  When the module is imported, it will ensure tha
 ## Scripting the creation of a new module
 My [New-PSModule.ps1](https://github.com/rokett/Powershell-Module-Template) script is used to create a new module; it creates the folder structure described above.
 
-There is an expectation that the manifest and loader files are in a folder called `_Templates` in whatever path you intend to use to create the new module in.  For example if you are creating a new module in `C:\Program Files\WindowsPowerShell\Modules` there should be a folder in there called `_Templates` which contains the two files.  Grab these from my [Github repo](https://github.com/rokett/Powershell-Module-Template).
+There is an expectation that the manifest and loader files are in a folder called `_Templates` in whatever path you intend to use to create the new module in.  For example if you are creating a new module in `C:\Program Files\WindowsPowerShell\Modules` there should be a folder in there called `_Templates` which contains the two files.  Grab these from my [GitHub repo](https://github.com/rokett/Powershell-Module-Template).
