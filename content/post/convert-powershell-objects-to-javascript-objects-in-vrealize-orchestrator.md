@@ -14,7 +14,7 @@ vRO is a gem of a product, given away for free with vCenter, from VMware; I know
 
 You'd think that the combination of PowerShell and vRO would be a match made in heaven.  Right?  Yeah not quite.
 
-vRO has methods for working with PowerShell, and they do work once you have your PowerShell host setup properly, but dealing with the object returned from a PowerShell script isn't that simple; vRO uses Javascript and therefore doesn't natively understand PowerShell objects.
+vRO has prebuilt workflows for working with PowerShell, and they do work once you have your PowerShell host setup properly, but dealing with the object returned from a PowerShell script isn't that simple; vRO uses Javascript and therefore doesn't natively understand PowerShell objects.
 
 There are ways around this...vRO has methods for dealing with PowerShell objects, but by and large it's much easier to deal with Javascript objects in vRO.  So the following handy dandy action will convert a PowerShell object into a Javascript object allowing you to work with it easily in vRO.
 
