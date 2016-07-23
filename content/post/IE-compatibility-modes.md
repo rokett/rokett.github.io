@@ -11,9 +11,9 @@ What happens when you want an internal site to be running at the latest supporta
 Well there are a number of ways.
 
 ### Edit the web.config file
-Well this is for IIS only but the same principle holds true for other web servers.  The idea is to add a header to the outgoing response, ensuring that the page is displayed in the latest version that the IE client supports.
+This is for IIS only but the same principle holds true for other web servers.  The idea is to add a header to the outgoing response, ensuring that the page is displayed in the latest version that the IE client supports.
 
-For the most part, if you have access to the web server, you should do this.  It's guaranteed to work in all situations.
+For the most part, if you have access to the web server, you should do this.  It's guaranteed to work in all situations (maybe - I'm sure there's some odd edgecase out there somewhere).
 
 ```
 <system.webServer>
