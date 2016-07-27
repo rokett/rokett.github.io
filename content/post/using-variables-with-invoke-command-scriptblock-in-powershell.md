@@ -1,6 +1,6 @@
 +++
 date = "2016-07-26T21:25:07+01:00"
-title = "Using variables with invoke command scriptblock in powershell"
+title = "Using variables with Invoke-Command script block in PowerShell"
 
 +++
 
