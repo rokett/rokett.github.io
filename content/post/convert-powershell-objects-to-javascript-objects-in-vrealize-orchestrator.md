@@ -18,17 +18,17 @@ vRO has prebuilt workflows for working with PowerShell, and they do work once yo
 
 There are ways around this...vRO has methods for dealing with PowerShell objects, but by and large it's much easier to deal with Javascript objects in vRO.  So the following handy dandy action will convert a PowerShell object into a Javascript object allowing you to work with it easily in vRO.
 
-### Create a new action
+#### Create a new action
 I'm going to assume you already know how to create an action, but for the sake of this article let's call it `convertPSObjectToArray`.
 
-### Set the input parameters
+#### Set the input parameters
 We need two parameters.
 
 The first is called `PSObject` and is of type `Powershell:PowershellRemotePSObject`.  This is the PowerShell object you want to convert.
 
 The second is called `properties` and is of type `Array`.  This is an array of properties that the PowerShell object has which you wish to be present in the final Javascript object.
 
-### Code the action
+#### Code the action
 The following code block is the meat of the action.  It takes in the PowerShell object, loops over it and assigns each property of each item to a JS object which is then pushed to the output array.  Hey presto, you have an array of JS objects.
 
 ```javascript
@@ -49,7 +49,7 @@ for each (item in root) {
 return output;
 ```
 
-### Use the action in a workflow
+#### Use the action in a workflow
 Now that the action is created, you can use it in a workflow.  Let's assume that we are retrieving a list of user accounts from AD using PowerShell.  From the returning object you want to get the username and email address for later processing.  Here's the full code.
 
 ```javascript

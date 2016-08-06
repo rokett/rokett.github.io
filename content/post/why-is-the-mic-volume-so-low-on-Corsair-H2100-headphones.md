@@ -17,6 +17,6 @@ Preamp: +10db
 
 +10db worked for me but YMMV.
 
-Save the file and the changes happen instantly.  Tweak to your hearts content.
+Save the file and the changes happen instantly.  Tweak to your heart's content.
 
 Credit where credit is due, this fix comes courtesy of http://forum.corsair.com/forums/showthread.php?t=132227.

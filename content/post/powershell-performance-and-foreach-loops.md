@@ -8,7 +8,7 @@ PowerShell is a powerful beast; the pipeline is crazy clever in terms of acting 
 
 Take the humble ForEach loop for example.  The pipeline way of doing things is actually the slowest, whilst the more traditional programming way of doing things is much faster.  How much faster?  Let's take a looksee.
 
-### ForEach-Object
+#### ForEach-Object
 ```powershell
 Measure-Command {
     (1..5000) | ForEach-Object {
@@ -22,7 +22,7 @@ This loop takes 11.6 seconds to complete.
 
 What about another option..How about working directly on the array.
 
-### arr.ForEach
+#### arr.ForEach
 ```powershell
 Measure-Command {
     (1..5000).ForEach{
@@ -38,7 +38,7 @@ Funny fact: the lack of a space after the `ForEach` command is not a mistake.  P
 
 Lastly the final, and quickest, option.
 
-### ForEach ($var in $arr)
+#### ForEach ($var in $arr)
 ```powershell
 Measure-Command {
     $1 = (1..5000)
