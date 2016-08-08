@@ -36,7 +36,7 @@ First we create a new `ArrayList`.  This is a .Net construct and crucially we ar
 
 Why the `[void]`?  Glad you asked...when you add entries to an `ArrayList` it will output out the row count every time.  That's just annoying and messes up your output, so casting it to `[void]` means that nothing is output.  There are other options, but that's a different article.
 
-OK so the important bit.  How much better is it?
+OK so the important bit, how much better is it?
 
 109 milliseconds, 1% CPU and 60MB RAM utilisation!  Yes you did read that right...**109 ms!**  That's a 99.8% improvement.
 

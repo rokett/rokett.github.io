@@ -1,6 +1,6 @@
 +++
 date = "2016-07-20T22:13:34+01:00"
-title = "Creating powershell modules"
+title = "Creating PowerShell modules"
 
 +++
 

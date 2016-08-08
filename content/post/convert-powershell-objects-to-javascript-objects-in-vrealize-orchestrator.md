@@ -1,6 +1,6 @@
 +++
 date = "2016-07-20T22:13:03+01:00"
-title = "Convert powershell objects to javascript objects in vRealize Orchestrator"
+title = "Convert PowerShell objects to Javascript objects in vRealize Orchestrator"
 
 +++
 

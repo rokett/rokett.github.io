@@ -1,6 +1,6 @@
 +++
 date = "2016-08-06T23:05:51+01:00"
-title = "Powershell performance and ForEach loops"
+title = "PowerShell performance and ForEach loops"
 
 +++
 
