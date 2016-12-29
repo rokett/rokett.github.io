@@ -14,6 +14,6 @@ Throwing exceptions when an error occurs is a useful way of providing context to
         }
     } Catch {}
 } | Sort-Object -Property FullName | Select-Object -Property FullName
-````
+```
 
 The above code will output all of the available exception types for you to choose the most appropriate.  You may need to look up exactly what information they are meant to convey, but it's a good start.
