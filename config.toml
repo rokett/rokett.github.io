@@ -1,4 +1,4 @@
-baseurl = "https://rokett.github.io/"
+baseURL = "https://rokett.github.io/"
 languageCode = "en-gb"
 title = "Rokett's musings"
 theme = "hugo-theme-blueberry-detox"
