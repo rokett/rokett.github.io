@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="Rokett">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="Rokett&#39;s musings">
+        <meta property="og:title" content="Rokett&#39;s musings">
+        <meta property="og:url" content="https://rokett.github.io/posts/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="website" />
+    
+        <meta name="generator" content="Hugo 0.58.1" />
+        <title>Posts &middot; Rokett&#39;s musings </title>
+        <link rel="canonical" href="https://rokett.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="https://rokett.github.io/posts/index.xml">
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/main.css"/>
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/site.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="https://rokett.github.io/css/tomorrow-night-eighties.css">
+        <script src="https://rokett.github.io/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-81748725-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://rokett.github.io/" alt="Rokett&#39;s musings"><h1 class="blog-title heading">Rokett&#39;s musings</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/accessing-websites-requiring-tls1.1-and-above-with-powershell/">Accessing Websites Requiring TLS1.1 and above with PowerShell</a></h3>
+        <p class="post-time"><time datetime="2019-10-27T22:43:35&#43;01:00">October 27, 2019</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>PowerShell, or at least Windows PowerShell, is somewhat behind the times, because it is based on .Net 4.x, in terms of supporting newer encryption protocols when access secure websites. By default .Net 4.x only supports up to TLS 1.1, but PowerShell still seems to be locked to TLS 1.0.
+So when attempting to either Invoke-WebRequest or Invoke-RestMethod you may receive an error message back saying The request was aborted: Could not create SSL/TLS secure channel.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/access-the-internet-with-powershell-behind-ntlm-proxy/">Access the internet with PowerShell behind NTLM proxy</a></h3>
+        <p class="post-time"><time datetime="2019-09-11T21:14:32Z">September 11, 2019</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>When you&rsquo;re behind a corporate proxy server which uses NTLM, you will probably find that PowerShell is unable to connect to the internet. Sometimes this will just silently fail, which sucks, and other times you&rsquo;ll receive an error.
+In order to prove there is a problem, try the following request.
+Invoke-WebRequest -Uri https://www.google.com/  The problem happens because an NTLM proxy server expects that user credentials will be passed for authentication purposes.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/what-exception-types-are-available-with-powershell/">What exception types are available with PowerShell</a></h3>
+        <p class="post-time"><time datetime="2016-12-29T15:19:59Z">December 29, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>Throwing exceptions when an error occurs is a useful way of providing context to whatever the problem is and therefore allowing the consumer to get meaning from the error. Ideally an exception would be accompanied with an exception type, but how do you know what exception types are available in PowerShell?
+[System.AppDomain]::CurrentDomain.GetAssemblies() | ForEach-Object { Try { $_.GetExportedTypes() | Where-Object { $_.Fullname -match 'Exception' } } Catch {} } | Sort-Object -Property FullName | Select-Object -Property FullName  The above code will output all of the available exception types for you to choose the most appropriate.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/best-practices-for-securing-access-to-keepass/">Best Practices for securing access to KeePass</a></h3>
+        <p class="post-time"><time datetime="2016-12-19T22:24:32Z">December 19, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>First things first&hellip;.calling this article best practices may be a bit strong. This is more about the way I like to secure access to KeePass; I&rsquo;m sure things could be done differently or better, but it works for my organisation.
+KeePass is a great tool.
+For teams, or individuals, needing to store passwords, and other data, in a truly secure way KeePass comes out on top. Unless unlocked with a master password, or a keyfile, or both, the information contained within the database is kept encrypted (using AES and Twofish) to secure it from prying eyes.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/iterating-over-a-powershell-hashtable/">Iterating over a PowerShell hashtable</a></h3>
+        <p class="post-time"><time datetime="2016-12-19T22:23:46Z">December 19, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>Iterating over a PowerShell hashtable&hellip;.it&rsquo;s not as easy as a simple ForEach loop; a hashtable isn&rsquo;t like an array.
+So how do you iterate over a hashtable? It&rsquo;s actually really easy as there is a method on the hashtable object called GetEnumerator(). Iterating a hashtable using the GetEnumerator() method sends each key/value pair to the pipeline.
+$hashtable = @{ 'key1' = 'value1' 'key2' = 'value2' 'key3' = 'value3' } $hashtable.GetEnumerator() | ForEach-Object { Write-Host &quot;$_.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/powershell-performance-and-array-manipulation/">PowerShell performance and array manipulation</a></h3>
+        <p class="post-time"><time datetime="2016-08-06T23:24:36&#43;01:00">August 6, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>Let&rsquo;s talk about array manipulation in PowerShell; specifically adding to an array within a loop.
+You&rsquo;re probably used to initialising the array like so; $arr = @() and then adding new entries to it from within a loop by $arr += $newEntry. That works but holy hell is it slow! Not only is it slow but it eats CPU and memory resources. Why? Well I&rsquo;m no expert on the inner workings of PowerShell but it&rsquo;s because arrays are not able to be changed in PowerShell.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/powershell-performance-and-foreach-loops/">PowerShell performance and ForEach loops</a></h3>
+        <p class="post-time"><time datetime="2016-08-06T23:05:51&#43;01:00">August 6, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>PowerShell is a powerful beast; the pipeline is crazy clever in terms of acting on many objects at once with a single command, but unless you&rsquo;re really trying to do a one-liner there are other faster ways of doing things.
+Take the humble ForEach loop for example. The pipeline way of doing things is actually the slowest, whilst the more traditional programming way of doing things is much faster. How much faster?</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/using-variables-with-invoke-command-scriptblock-in-powershell/">Using variables with Invoke-Command script block in PowerShell</a></h3>
+        <p class="post-time"><time datetime="2016-07-26T21:25:07&#43;01:00">July 26, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>The Invoke-Command PowerShell cmdlet is pretty handy. It allows you to run commands from your local system as if they were being run on a remote system. Here&rsquo;s a simple example:
+Get-Service -DisplayName 'Task Scheduler'  This retrieves the Task Scheduler service. It runs locally on whichever computer you used the command from. But what if you wanted to get the Task Scheduler service on a remote computer?
+Sure you could do this (which would run the command against the computer called server01):</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/using-travis-ci-to-deploy-this-blog/">Using Travis CI to deploy this site</a></h3>
+        <p class="post-time"><time datetime="2016-07-23T12:30:26&#43;01:00">July 23, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>This site is hosted on GitHub Pages. I wanted to be able to just be concerned with writing articles and commiting them to the repository; I didn&rsquo;t particularly want to have to build the site locally and then commit that to the master branch. That&rsquo;s where Travis-CI came in.
+Travis-CI is a continuous integration platform which can link into GitHub and take action based on commits to the repository. In essence my workflow is as follows:</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+		<article class="li posts">
+    <header class="post-header">
+        <h3 class="post-title"><a href="https://rokett.github.io/posts/creating-powershell-modules/">Creating PowerShell modules</a></h3>
+        <p class="post-time"><time datetime="2016-07-20T22:13:34&#43;01:00">July 20, 2016</time></p>
+    </header>
+    
+    <section class="post-excerpt">
+        <p>What is the best way to structure a PowerShell module? Realistically there is no such thing, however I have a structure which works for me; it provides a standard which is followed within my organisation and covers any modules I create. Standard practices are good&hellip;doing things differently each and every time makes understanding how something is working very difficult.
+So what&rsquo;s the structure?
+Let&rsquo;s look at that structure a bit more.</p>
+    </section>
+
+    <footer class="post-footer">
+        <span>
+            
+            
+        </span>
+    </footer>
+</article>
+	
+	
+<nav role="pagination" class="pagination">
+  
+	<span class="post-list-pagination-item post-list-pagination-item-current">Page 1 of 2</span>
+
+  <a href="/posts/page/2/" class="older-posts">
+    &nbsp;Older&nbsp;<i class="fa fa-angle-double-right"></i>
+  </a>
+
+</nav>
+
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://github.com/rokett" title="Browse my GitHub repository"><span class="tooltip"><i class="fa fa-github"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://rokett.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+</body>
+</html>

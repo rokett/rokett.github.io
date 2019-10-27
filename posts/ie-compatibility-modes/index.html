@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="Rokett">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="Rokett&#39;s musings">
+        <meta property="og:title" content="Rokett&#39;s musings">
+        <meta property="og:url" content="https://rokett.github.io/posts/ie-compatibility-modes/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="Rokett" />
+        <meta property="og:article:published_time" content="2016-07-20T22:13:21&#43;01:00" />
+    
+        <meta name="generator" content="Hugo 0.58.1" />
+        <title>IE compatibility modes &middot; Rokett&#39;s musings </title>
+        <link rel="canonical" href="https://rokett.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/main.css"/>
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/site.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="https://rokett.github.io/css/tomorrow-night-eighties.css">
+        <script src="https://rokett.github.io/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-81748725-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://rokett.github.io/" alt="Rokett&#39;s musings"><h1 class="blog-title heading">Rokett&#39;s musings</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="posts">
+	<header class="post-header">
+        <h3 class="p-post-title">IE compatibility modes</h3>
+    </header>
+
+    <section class="post-content">
+        
+
+<p>In order to support legacy websites or systems, those expecting IE6 for example (yes there are still a lot!), IE has the concept of compatibility modes.  It is common within enterprises to ensure that sites running on the local domain run in compatibility mode as they would break if they didn&rsquo;t.  I say it&rsquo;s common&hellip;it is in organisations with legacy web based systems but it should be getting less common there as time moves on.</p>
+
+<p>What happens when you want an internal site to be running at the latest supportable IE version though? How do you ensure that happens when IE sees it as being part of the internal domain and forces it into compatibility mode?</p>
+
+<p>Well there are a number of ways.</p>
+
+<h4 id="edit-the-web-config-file">Edit the web.config file</h4>
+
+<p>This is for IIS only but the same principle holds true for other web servers.  The idea is to add a header to the outgoing response, ensuring that the page is displayed in the latest version that the IE client supports.</p>
+
+<p>For the most part, if you have access to the web server, you should do this.  It&rsquo;s guaranteed to work in all situations (maybe - I&rsquo;m sure there&rsquo;s some odd edgecase out there somewhere).</p>
+
+<pre><code>&lt;system.webServer&gt;
+    &lt;httpProtocol&gt;
+        &lt;customHeaders&gt;
+            &lt;add name=&quot;X-UA-Compatible&quot; value=&quot;IE=Edge&quot; /&gt;
+        &lt;/customHeaders&gt;
+    &lt;/httpProtocol&gt;
+&lt;/system.webServer&gt;
+</code></pre>
+
+<h4 id="add-a-meta-tag-to-the-page">Add a meta tag to the page</h4>
+
+<p>This is useful if you don&rsquo;t have access to the web server.  The only issue here is that it doesn&rsquo;t always work.  It really depends on whether IE sets compatibilty mode before or after the meta tags have been read.</p>
+
+<p>You&rsquo;d think this would be a standard order of things, but in my experience I&rsquo;ve seen some work and others not on the same infrastructure.  Maybe I&rsquo;ve just not looked at it properly.</p>
+
+<pre><code class="language-html">&lt;meta http-equiv=&quot;x-ua-compatible&quot; content=&quot;IE=Edge&quot;&gt;
+</code></pre>
+
+<h4 id="use-the-html5-doctype">Use the HTML5 doctype</h4>
+
+<p>Realistically you should be doing this anwyay.  Ensure that the HTML5 doctype is present at the top of the page.</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+</code></pre>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            <section class="author">
+                <p>Words by Rokett</p>
+            </section>
+            
+
+            <p class="f-post-time"><time datetime="2016-07-20T22:13:21&#43;01:00">July 20, 2016</time></p>
+        </section>
+
+        <section class="f-2">
+            
+        </section>
+    </footer>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://github.com/rokett" title="Browse my GitHub repository"><span class="tooltip"><i class="fa fa-github"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://rokett.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+
+</body>
+</html>

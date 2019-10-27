@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="Rokett">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="Rokett&#39;s musings">
+        <meta property="og:title" content="Rokett&#39;s musings">
+        <meta property="og:url" content="https://rokett.github.io/posts/powershell-performance-and-foreach-loops/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="Rokett" />
+        <meta property="og:article:published_time" content="2016-08-06T23:05:51&#43;01:00" />
+    
+        <meta name="generator" content="Hugo 0.58.1" />
+        <title>PowerShell performance and ForEach loops &middot; Rokett&#39;s musings </title>
+        <link rel="canonical" href="https://rokett.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/main.css"/>
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/site.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="https://rokett.github.io/css/tomorrow-night-eighties.css">
+        <script src="https://rokett.github.io/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-81748725-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://rokett.github.io/" alt="Rokett&#39;s musings"><h1 class="blog-title heading">Rokett&#39;s musings</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="posts">
+	<header class="post-header">
+        <h3 class="p-post-title">PowerShell performance and ForEach loops</h3>
+    </header>
+
+    <section class="post-content">
+        
+
+<p>PowerShell is a powerful beast; the pipeline is crazy clever in terms of acting on many objects at once with a single command, but unless you&rsquo;re really trying to do a one-liner there are other faster ways of doing things.</p>
+
+<p>Take the humble ForEach loop for example.  The pipeline way of doing things is actually the slowest, whilst the more traditional programming way of doing things is much faster.  How much faster?  Let&rsquo;s take a looksee.</p>
+
+<h4 id="foreach-object">ForEach-Object</h4>
+
+<pre><code class="language-powershell">Measure-Command {
+    (1..5000) | ForEach-Object {
+        (1..100) | ForEach-Object {
+            $_ * $_
+        }
+    }
+}
+</code></pre>
+
+<p>This loop takes 11.6 seconds to complete.</p>
+
+<p>What about another option..How about working directly on the array.</p>
+
+<h4 id="arr-foreach">arr.ForEach</h4>
+
+<pre><code class="language-powershell">Measure-Command {
+    (1..5000).ForEach{
+        (1..100).ForEach{
+            $_ * $_
+        }
+    }
+}
+</code></pre>
+
+<p>This one takes 3.5 seconds to complete.  That&rsquo;s a 69% increase in speed over the <code>ForEach-Object</code> option.</p>
+
+<p>Funny fact: the lack of a space after the <code>ForEach</code> command is not a mistake.  PowerShell throws up an error if there is a space.  Go figure!</p>
+
+<p>Lastly the final, and quickest, option.</p>
+
+<h4 id="foreach-var-in-arr">ForEach ($var in $arr)</h4>
+
+<pre><code class="language-powershell">Measure-Command {
+    $1 = (1..5000)
+    ForEach ($num1 in $1) {
+        $2 = (1..100)
+        ForEach ($num2 in $2) {
+            $num1 * $num2
+        }
+    }
+}
+</code></pre>
+
+<p>834 ms!  That&rsquo;s a 92% increase in speed over the <code>ForEach-Object</code> option and a 76% increase in speed over the <code>arr.ForEach</code> option.</p>
+
+<p>It may not be as pretty as the other options, and yes it&rsquo;s more verbose, but to be honest I prefer that in a script (the verbosity not the lack of prettiness).</p>
+
+<p>If you&rsquo;re not fussed about speed and you&rsquo;re not doing many iterations maybe it doesn&rsquo;t matter that you use a slower option for the prettiness factor. On the other hand if you need to squeeze some speed out, definitely do it the more verbose way.</p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            <section class="author">
+                <p>Words by Rokett</p>
+            </section>
+            
+
+            <p class="f-post-time"><time datetime="2016-08-06T23:05:51&#43;01:00">August 6, 2016</time></p>
+        </section>
+
+        <section class="f-2">
+            
+        </section>
+    </footer>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://github.com/rokett" title="Browse my GitHub repository"><span class="tooltip"><i class="fa fa-github"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://rokett.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="Rokett">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="Rokett&#39;s musings">
+        <meta property="og:title" content="Rokett&#39;s musings">
+        <meta property="og:url" content="https://rokett.github.io/posts/best-practices-for-securing-access-to-keepass/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="Rokett" />
+        <meta property="og:article:published_time" content="2016-12-19T22:24:32Z" />
+    
+        <meta name="generator" content="Hugo 0.58.1" />
+        <title>Best Practices for securing access to KeePass &middot; Rokett&#39;s musings </title>
+        <link rel="canonical" href="https://rokett.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/main.css"/>
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/site.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="https://rokett.github.io/css/tomorrow-night-eighties.css">
+        <script src="https://rokett.github.io/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-81748725-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://rokett.github.io/" alt="Rokett&#39;s musings"><h1 class="blog-title heading">Rokett&#39;s musings</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="posts">
+	<header class="post-header">
+        <h3 class="p-post-title">Best Practices for securing access to KeePass</h3>
+    </header>
+
+    <section class="post-content">
+        <p>First things first&hellip;.calling this article best practices may be a bit strong.  This is more about the way I like to secure access to KeePass; I&rsquo;m sure things could be done differently or better, but it works for my organisation.</p>
+
+<p><a href="http://keepass.info/">KeePass</a> is a great tool.</p>
+
+<p>For teams, or individuals, needing to store passwords, and other data, in a truly secure way KeePass comes out on top.  Unless unlocked with a master password, or a keyfile, or both, the information contained within the database is kept encrypted (using AES and Twofish) to secure it from prying eyes.  As long as the method of securing the database is strong, meaning a strong master password or secured keyfile, you should be good.</p>
+
+<p>So in a team environment where many people need to access the database, how can one ensure that the details needed to access the database are secure?</p>
+
+<p>You could create a strong master password, distribute that to the people who need to know and call it a day; the problem is that people move jobs or leave organisations at which point the master password should really be changed, but is it?</p>
+
+<p>How about an alternative method which doesn&rsquo;t rely on a master password but instead uses security features built-in to the OS.</p>
+
+<p>Do away with the master password and rely on a keyfile instead.  The keyfile should be stored on a network accessible share which is secured to allow the people who need to access it read only permissions.  Now when opening KeePass it is looking at the secure keyfile which is on the network and, assuming you have configured permissions appropriately, is only accessible to those people who should have access to it.  As people move jobs and leave, remove their permissions and in one move the data is secured.</p>
+
+<p>Just two things to be aware of and take into account here:</p>
+
+<ol>
+<li>Someone is going to need write access in order to put the keyfile there in the first place and update it should you need to.  Maybe this is best secured with a Domain Admin account (assuming Active Directory here), which should already be a secure and trusted account.</li>
+<li>You should take a copy of the keyfile and keep it secure elsewhere to protect against corruption or loss.  Without the keyfile, you&rsquo;re not getting into that database again.</li>
+</ol>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            <section class="author">
+                <p>Words by Rokett</p>
+            </section>
+            
+
+            <p class="f-post-time"><time datetime="2016-12-19T22:24:32Z">December 19, 2016</time></p>
+        </section>
+
+        <section class="f-2">
+            
+        </section>
+    </footer>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://github.com/rokett" title="Browse my GitHub repository"><span class="tooltip"><i class="fa fa-github"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://rokett.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+
+</body>
+</html>

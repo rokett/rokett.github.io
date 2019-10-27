@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://rokett.github.io/posts/accessing-websites-requiring-tls1.1-and-above-with-powershell/</loc>
+    <lastmod>2019-10-27T22:43:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/</loc>
+    <lastmod>2019-10-27T22:43:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/</loc>
+    <lastmod>2019-10-27T22:43:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/access-the-internet-with-powershell-behind-ntlm-proxy/</loc>
+    <lastmod>2019-09-11T21:14:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/what-exception-types-are-available-with-powershell/</loc>
+    <lastmod>2016-12-29T15:19:59+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/best-practices-for-securing-access-to-keepass/</loc>
+    <lastmod>2016-12-19T22:24:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/iterating-over-a-powershell-hashtable/</loc>
+    <lastmod>2016-12-19T22:23:46+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/powershell-performance-and-array-manipulation/</loc>
+    <lastmod>2016-08-06T23:24:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/powershell-performance-and-foreach-loops/</loc>
+    <lastmod>2016-08-06T23:05:51+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/using-variables-with-invoke-command-scriptblock-in-powershell/</loc>
+    <lastmod>2016-07-26T21:25:07+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/using-travis-ci-to-deploy-this-blog/</loc>
+    <lastmod>2016-07-23T12:30:26+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/creating-powershell-modules/</loc>
+    <lastmod>2016-07-20T22:13:34+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/ie-compatibility-modes/</loc>
+    <lastmod>2016-07-20T22:13:21+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/convert-powershell-objects-to-javascript-objects-in-vrealize-orchestrator/</loc>
+    <lastmod>2016-07-20T22:13:03+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/posts/why-is-the-mic-volume-so-low-on-corsair-h2100-headphones/</loc>
+    <lastmod>2016-07-20T21:33:35+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://rokett.github.io/tags/</loc>
+  </url>
+  
+</urlset>

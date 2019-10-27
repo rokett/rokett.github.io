@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" prefix="og: http://ogp.me/ns#" xmlns:og="http://ogp.me/ns#"><!--<![endif]-->
+
+    <head>
+                <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="author" content="Rokett">
+        <meta name="keywords" content="awesome, definitely">
+	
+        <meta property="og:site_name" content="Rokett&#39;s musings">
+        <meta property="og:title" content="Rokett&#39;s musings">
+        <meta property="og:url" content="https://rokett.github.io/posts/using-variables-with-invoke-command-scriptblock-in-powershell/">
+        <meta property="og:description" content="">
+    
+        <meta property="og:type" content="article" />
+        <meta property="og:article:author" content="Rokett" />
+        <meta property="og:article:published_time" content="2016-07-26T21:25:07&#43;01:00" />
+    
+        <meta name="generator" content="Hugo 0.58.1" />
+        <title>Using variables with Invoke-Command script block in PowerShell &middot; Rokett&#39;s musings </title>
+        <link rel="canonical" href="https://rokett.github.io/" />
+        <link rel="alternate" type="application/rss+xml" title="RSS" href="">
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/main.css"/>
+        <link rel="stylesheet" type='text/css' href="https://rokett.github.io/css/site.css"/>
+        <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300|Montserrat:700' rel='stylesheet' type='text/css'>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+        <link rel="stylesheet" href="https://rokett.github.io/css/tomorrow-night-eighties.css">
+        <script src="https://rokett.github.io/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-81748725-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+    </head>
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chrome/‎">install Google Chrome</a> to experience this site.</p><![endif]-->
+
+    <header id="site-header">
+        <div class="container">
+            <a href="https://rokett.github.io/" alt="Rokett&#39;s musings"><h1 class="blog-title heading">Rokett&#39;s musings</h1></a>
+            <p class="blog-description"></p>
+        </div>
+    </header>
+<main class="content" role="main">
+	<div class="container">
+		<article class="posts">
+	<header class="post-header">
+        <h3 class="p-post-title">Using variables with Invoke-Command script block in PowerShell</h3>
+    </header>
+
+    <section class="post-content">
+        
+
+<p>The <code>Invoke-Command</code> PowerShell cmdlet is pretty handy.  It allows you to run commands from your local system as if they were being run on a remote system.  Here&rsquo;s a simple example:</p>
+
+<pre><code class="language-powershell">Get-Service -DisplayName 'Task Scheduler'
+</code></pre>
+
+<p>This retrieves the Task Scheduler service.  It runs locally on whichever computer you used the command from.  But what if you wanted to get the Task Scheduler service on a remote computer?</p>
+
+<p>Sure you could do this (which would run the command against the computer called <code>server01</code>):</p>
+
+<pre><code class="language-powershell">Get-Service -DisplayName 'Task Scheduler' -ComputerName 'server01'
+</code></pre>
+
+<p>But you could also do it like this using <code>Invoke-Command</code>:</p>
+
+<pre><code class="language-powershell">Invoke-Command -ComputerName 'server01' -ScriptBlock {
+    Get-Service -DisplayName 'Task Scheduler'
+}
+</code></pre>
+
+<p>It effectively does the same thing as the previous example, but it runs the command locally on <code>server01</code> using <code>WinRM</code>.  Generally speaking <code>WinRM</code> requires less setup than ensuring a remote call works.  It is enabled by default on Windows 2012 R2 and above, and is simple to enable on other Windows versions assuming they are running at least PowerShell 2.</p>
+
+<h4 id="getting-to-the-point">Getting to the point</h4>
+
+<p>So this article is about passing variables into the <code>Invoke-Command</code> script block.  Can&rsquo;t you just use variables directly?  Nope&hellip;any variables defined outside of the script block do not exist in the scope of the script block itself.  You therefore need to pass them in somehow.</p>
+
+<p>We&rsquo;re going to focus on the method of doing this from PowerShell 3 upwards.  There are other methods for PowerShell 2 and below, but those versions are old now and we need to move on.  So how does it work with PowerShell 3?</p>
+
+<p>Taking our simple example, what if this was a function and we wanted to allow the user to specify the service name?  We&rsquo;d probably want them to pass it in as a parameter, in which case how do we pass it to the script block?  This is how:</p>
+
+<pre><code class="language-powershell">Function Get-RemoteServiceDetails() {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory=$True)]
+        [string]$ServiceDisplayName
+    }
+
+    Invoke-Command -ComputerName 'server01' -ScriptBlock {
+        Get-Service -DisplayName $Using:ServiceDisplayName
+    }
+}
+</code></pre>
+
+<p>The magic there is the <code>$Using:</code> command.  This tells the script block that we want to use the <code>$ServiceDisplayName</code> parameter from the parent scope.</p>
+
+<p>And that&rsquo;s all there is to it!</p>
+
+    </section>
+
+    <hr>
+
+    <footer class="post-footer">
+        <section class="f-1">
+            
+            <section class="author">
+                <p>Words by Rokett</p>
+            </section>
+            
+
+            <p class="f-post-time"><time datetime="2016-07-26T21:25:07&#43;01:00">July 26, 2016</time></p>
+        </section>
+
+        <section class="f-2">
+            
+        </section>
+    </footer>
+</article>
+	</div>
+</main>
+    <footer id="site-footer">
+        <div class="container">
+            <a href="https://github.com/rokett" title="Browse my GitHub repository"><span class="tooltip"><i class="fa fa-github"></i></span></a>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://rokett.github.io/js/fittext.js"></script>
+    <script type="text/javascript">
+      $(".heading").fitText();
+    </script>
+
+
+</body>
+</html>
